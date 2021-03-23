@@ -5,4 +5,3 @@ from .models import Venda
 # Register your models here.
 
 admin.site.register(Venda)
-
