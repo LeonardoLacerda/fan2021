@@ -8,4 +8,3 @@ python manage.py migrate
 python manage.py createsuperuser
 
 OBS: Caso opte por fazer a instalação no servidor de produção, deve-se utilizar o arquivo de requirements. ao invés do requirements-dev.txt
-
