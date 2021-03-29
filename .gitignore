@@ -1,7 +1,9 @@
 ################################################
 # Arquivo de template do gitignore para Django #
 ################################################
+
 # Arquivos gerados pelo PyCharm.
+
 #Ignorando toda a pasta para que o código funcione em qualquer IDE
 .idea/
 
