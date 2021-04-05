@@ -44,7 +44,7 @@ MY_APPS = [
 ]
 
 THIRDS_APPS = [
-
+    'bootstrapform',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + MY_APPS + THIRDS_APPS
