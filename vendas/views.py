@@ -1,8 +1,16 @@
 from django.shortcuts import render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from .models import Venda, Produto
 from django.urls import reverse_lazy
 # Create your views here.
+
+
+class VendaListView(ListView):
+    model = Venda
+    template_name = 'listar/venda.html'
+
+
+
 
 class VendaCreateView(CreateView):
     model = Venda
