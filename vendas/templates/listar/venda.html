@@ -12,8 +12,29 @@
             <td><b>Cliente:</b> {{obj_venda.cliente}}</td>
         </tr>
     {% empty %}
-        <h3>Desculpe, você ainda nao possui vendas cadastradas em seu sistema. <br/>:'(</h3>
+        <h3>Desculpe, você ainda nao possui vendas cadastradas em seu sistema.
+            <br/>:'(</h3>
     {% endfor %}
     </table>
+
+    {% if is_paginated %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; Primeira Página |</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Página Anterior </a>
+                {% endif %}
+
+                <span class="current">
+                    | Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}. |
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Próxima Página</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">| Última Página &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
 {% endblock %}
 
