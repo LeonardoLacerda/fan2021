@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 DEFAULT_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,6 +45,9 @@ MY_APPS = [
 
 THIRDS_APPS = [
     'bootstrapform',
+    'adminlte3',
+    'adminlte3_theme',
+    'django.contrib.admin',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + MY_APPS + THIRDS_APPS
@@ -133,7 +136,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 
+# Utilizar no linux
+'''
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 ]
+'''
