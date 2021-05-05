@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, UpdateView
 from .models import Venda, Produto
+from django.contrib import messages
 from django.urls import reverse_lazy
 # Create your views here.
 
@@ -11,6 +12,7 @@ class VendaCreateView(CreateView):
     fields = '__all__'
 
     def get_success_url(self):
+        messages.success(self.request, 'Venda cadastrada com suceso!')
         return reverse_lazy("listar_venda")
 
 
@@ -23,6 +25,7 @@ class ProdutoCreateView(CreateView):
     fields = ['nome', 'valor']
 
     def get_success_url(self):
+        messages.success(self.request, 'Produto cadastrado com sucesso!')
         return reverse_lazy('cadastrar_produto')
 
 
@@ -39,5 +42,6 @@ class VendaUpdateView(UpdateView):
     fields = '__all__'
 
     def get_success_url(self):
+        messages.success(self.request, 'Venda atualizada com sucesso!')
         return reverse_lazy('listar_venda')
 
