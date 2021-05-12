@@ -1,9 +1,9 @@
 {% extends 'adminlte/base.html' %}
 {% block content %}
     <h1>Página de listagem de venda</h1>
-    <a class="btn btn-success" href="{% url 'cadastrar_venda' %}">CADASTRAR VENDA</a>
+    <a class="btn btn-success" href="{% url 'cadastrar_venda' %}"><i class="fa fa-plus"></i> CADASTRAR VENDA</a>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <th>ID</th>
             <th>NOME</th>
@@ -16,19 +16,23 @@
     {% for obj_venda in object_list %}
             <tr>
                 <td>{{obj_venda.pk}}</td>
-                <td>{{obj_venda.nome}}</td>
+                {% if obj_venda.nome|length > 30 %}
+                <td>{{obj_venda.nome|slice:":30"}}...</td>
+                {% else %}
+                <td>{{obj_venda.nome|slice:":30"}}</td>
+                {% endif %}
                 <td>{{obj_venda.valor}}</td>
                 <td>{{obj_venda.data_venda}}</td>
                 <td>{{obj_venda.cliente}}</td>
                 <td>
-                    <a href="{% url 'corrigir_venda' obj_venda.pk %}">CORRIGIR VENDA</a>
-                    <a href="{% url 'detalhes_venda' obj_venda.pk %}">VER DETALHES | </a>
-                    <a href="{% url 'atualizar_observacao_venda' obj_venda.pk %}">| ATUALIZAR OBSERVAÇÃO DA VENDA |</a>
-                    <a href="{% url 'atualizar_cliente_venda' obj_venda.pk %}">ATUALIZAR CLIENTE DA VENDA | </a>
+                    <a href="{% url 'detalhes_venda' obj_venda.pk %}"><i class="fa fa-search" rel="tooltip" title="Ver detalhes da venda"></i> </a>
+                    <a href="{% url 'corrigir_venda' obj_venda.pk %}"><i class="fa fa-edit" rel="tooltip" title="Editar Venda"></i></a>
+                    <a href="{% url 'atualizar_observacao_venda' obj_venda.pk %}"><i class="fa fa-edit"  rel="tooltip" title="Editar Observação"></i></a>
+                    <a href="{% url 'atualizar_cliente_venda' obj_venda.pk %}"><i class="fa fa-edit"  rel="tooltip" title="Editar Cliente da Venda"></i></a>
                     {% if obj_venda.excluido is False %}
-                    <a href="{% url 'ajax_desabilitar_venda' obj_venda.pk %}">DESABILITAR</a>
+                    <a href="{% url 'ajax_desabilitar_venda' obj_venda.pk %}"><i class="fa fa-times" rel="tooltip" title="Desabilitar Venda"></i></a>
                     {% else %}
-                    <a href="{% url 'ajax_habilitar_venda' obj_venda.pk %}">HABILITAR</a>
+                    <a href="{% url 'ajax_habilitar_venda' obj_venda.pk %}"><i class="fa fa-check" rel="tooltip" title="Habilitar Venda"></i></a>
                     {% endif %}
                 </td>
             </tr>
@@ -43,8 +47,8 @@
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; Primeira Página |</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">Página Anterior </a>
+                    <a class="btn btn-default" href="?page=1">&laquo; Primeira Página </a>
+                <a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-arrow-left"></i> Página Anterior </a>
                 {% endif %}
 
                 <span class="current">
@@ -52,8 +56,8 @@
                 </span>
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">Próxima Página</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">| Última Página &raquo;</a>
+                    <a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Próxima Página <i class="fa fa-arrow-right"></i></a>
+                    <a class="btn btn-default" href="?page={{ page_obj.paginator.num_pages }}">| Última Página &raquo;</a>
                 {% endif %}
             </span>
         </div>

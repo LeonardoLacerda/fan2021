@@ -6,6 +6,6 @@
         {% csrf_token %}
         {{ form|bootstrap }}
         <a class="btn btn-warning" href="{% url 'listar_venda' %}">Voltar</a>
-        <input class="btn btn-primary" type="submit" value="Cadastrar">
+        <input class="btn btn-success" type="submit" value="Cadastrar">
     </form>
 {% endblock %}
