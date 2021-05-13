@@ -1,4 +1,5 @@
 {% extends 'adminlte/base.html' %}
+
 {% block content %}
     <h1>Página de listagem de venda</h1>
     <a class="btn btn-success" href="{% url 'cadastrar_venda' %}"><i class="fa fa-plus"></i> CADASTRAR VENDA</a>
@@ -30,9 +31,9 @@
                     <a href="{% url 'atualizar_observacao_venda' obj_venda.pk %}"><i class="fa fa-edit"  rel="tooltip" title="Editar Observação"></i></a>
                     <a href="{% url 'atualizar_cliente_venda' obj_venda.pk %}"><i class="fa fa-edit"  rel="tooltip" title="Editar Cliente da Venda"></i></a>
                     {% if obj_venda.excluido is False %}
-                    <a href="{% url 'ajax_desabilitar_venda' obj_venda.pk %}"><i class="fa fa-times" rel="tooltip" title="Desabilitar Venda"></i></a>
+                    <a class="desabilitar-venda" data-url="{% url 'ajax_desabilitar_venda' obj_venda.pk %}" href="#"><i class="fa fa-times" rel="tooltip" title="Desabilitar Venda"></i></a>
                     {% else %}
-                    <a href="{% url 'ajax_habilitar_venda' obj_venda.pk %}"><i class="fa fa-check" rel="tooltip" title="Habilitar Venda"></i></a>
+                    <a class="habilitar-venda" data-url="{% url 'ajax_habilitar_venda' obj_venda.pk %}" href="#"><i class="fa fa-check" rel="tooltip" title="Habilitar Venda"></i></a>
                     {% endif %}
                 </td>
             </tr>
@@ -63,4 +64,75 @@
         </div>
     {% endif %}
 {% endblock %}
+
+
+{% block javascript %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Vai ser executado apenas após a página estar pronta. Ou seja, carregada.
+
+            $(".desabilitar-venda").click(function() {
+                var url = $(this).attr('data-url');
+                swal({
+                  title: "Desabilitar Venda",
+                  text: "Tem certeza que deseja desabilitar esta venda?",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    $.ajax({
+                        url: url,
+                        success: function (data) {
+                            swal("Venda desabilitada com sucesso!", {
+                              icon: "success",
+                              timer: 3000
+                            });
+                            location.reload();
+                        }
+                    });
+
+                  } else {
+                    swal("Ação cancelada...");
+                  }
+                });
+            });
+
+            $(".habilitar-venda").click(function() {
+                var url = $(this).attr('data-url');
+                swal({
+                  title: "Habilitar Venda",
+                  text: "Tem certeza que deseja habilitar esta venda?",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    $.ajax({
+                        url: url,
+                        success: function (data) {
+                            swal("Venda habilitada com sucesso!", {
+                              icon: "success",
+                              timer: 3000
+                            });
+                            location.reload();
+                        }
+                    });
+
+                  } else {
+                    swal("Ação cancelada...");
+                  }
+                });
+            });
+
+        });
+
+    </script>
+
+{% endblock %}
+
 
