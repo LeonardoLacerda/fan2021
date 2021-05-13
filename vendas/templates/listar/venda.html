@@ -75,7 +75,10 @@
 
             // Clicando no ícone de desabilitar
             $(".desabilitar-venda").click(function() {
+                //Capturando o valor da propriedate "data-url" que está na tag do ícone com a classe "desabilitar-venda"
                 var url = $(this).attr('data-url');
+
+                //Abrindo o nosso modal (popup) do SweetAlert com as opções de "confirmação de açao" e "cancelar ação"
                 swal({
                   title: "Desabilitar Venda",
                   text: "Tem certeza que deseja desabilitar esta venda?",
@@ -85,18 +88,26 @@
                 })
                 .then((willDelete) => {
                   if (willDelete) {
+
+                    //Se clicar na ação de confirmar a deleção, irá iniciar o AJAX
                     $.ajax({
                         url: url,
                         success: function (data) {
+
+                            //No sucesso do AJAX, irá exibir uma modal com SweetAlert informando que a desabilitação foi realizada com sucesso
                             swal("Venda desabilitada com sucesso!", {
                               icon: "success",
                               timer: 3000
                             });
+
+                            //Recarregando a página
                             location.reload();
                         }
                     });
 
                   } else {
+
+                    //Exibindo o SweetAlert caso o usuário cancele a ação
                     swal("Ação cancelada...");
                   }
                 });
