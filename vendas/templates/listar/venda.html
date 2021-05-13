@@ -73,6 +73,7 @@
         $(document).ready(function() {
             // Vai ser executado apenas após a página estar pronta. Ou seja, carregada.
 
+            // Clicando no ícone de desabilitar
             $(".desabilitar-venda").click(function() {
                 var url = $(this).attr('data-url');
                 swal({
@@ -101,6 +102,7 @@
                 });
             });
 
+            //Clicando no ícone de habilitar
             $(".habilitar-venda").click(function() {
                 var url = $(this).attr('data-url');
                 swal({
