@@ -9,6 +9,7 @@ from .views import (
     , VendaAtualizarClienteView
     , VendaView
     , VendaDetailView
+    , VendaPDFDetailView
 )
 
 urlpatterns = [
@@ -21,5 +22,6 @@ urlpatterns = [
     path('ajax/desabilitar/venda/<int:pk>', VendaView.desabilitarVenda, name="ajax_desabilitar_venda"),
     path('ajax/habilitar/venda/<int:pk>', VendaView.habilitarVenda, name="ajax_habilitar_venda"),
     path('detalhes/venda/<int:pk>', VendaDetailView.as_view(), name="detalhes_venda"),
+    path('pdf/venda/<int:pk>', VendaPDFDetailView.as_view(), name="pdf_venda"),
 ]
 

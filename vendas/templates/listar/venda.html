@@ -11,6 +11,7 @@
             <th>VALOR</th>
             <th>DATA DA VENDA</th>
             <th>CLIENTE</th>
+            <th>RECIBO</th>
             <th>AÇÕES</th>
         </thead>
         <tbody>
@@ -25,6 +26,11 @@
                 <td>{{obj_venda.valor}}</td>
                 <td>{{obj_venda.data_venda}}</td>
                 <td>{{obj_venda.cliente}}</td>
+                <td>
+                    <center>
+                        <a target="_blank" href="{% url 'pdf_venda' obj_venda.pk %}"><i class="fa fa-file-pdf" rel="tooltip" title="Visualizar Recibo"></i> </a>
+                    </center>
+                </td>
                 <td>
                     <a href="{% url 'detalhes_venda' obj_venda.pk %}"><i class="fa fa-search" rel="tooltip" title="Ver detalhes da venda"></i> </a>
                     <a href="{% url 'corrigir_venda' obj_venda.pk %}"><i class="fa fa-edit" rel="tooltip" title="Editar Venda"></i></a>

@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from .forms import VendaForm, VendaObservacaoForm, VendaClienteForm
+from easy_pdf.views import PDFTemplateResponseMixin
 # Create your views here.
 
 
@@ -77,3 +78,8 @@ class VendaView(View):
 class VendaDetailView(DetailView):
     model = Venda
     template_name = 'detalhes/venda.html'
+
+
+class VendaPDFDetailView(PDFTemplateResponseMixin, DetailView):
+    model = Venda
+    template_name = 'detalhes/pdf_venda.html'
